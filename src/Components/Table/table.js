@@ -24,6 +24,19 @@ class Table extends Component {
             newArray[i].text.sort((a,b) => (Object.values(a) > Object.values(b)) ? 1 : ((Object.values(b) > Object.values(a)) ? -1 : 0))
         }
 
+        //Inset description to every node
+        for (let i = 0; i < this.props.objModel.model.nodeDataArray.length; i++) {
+            if(i === 0){
+                newArray[0]["des"] = newArray[0].from + "  (With nothing)"
+            } else if(i === this.props.objModel.model.nodeDataArray.length - 1) {
+                newArray[this.props.objModel.model.nodeDataArray.length - 1]["des"] = newArray[this.props.objModel.model.nodeDataArray.length - 1].from + "  (Final Staet) " + this.props.objModel.model.nodeDataArray[i].state
+            } else {
+                newArray[i]["des"] = newArray[i].from + "  (Ending with  )  " + this.props.objModel.model.nodeDataArray[i].state
+            }
+        }
+
+        console.log(newArray)
+
         return (
             <table class="table table-bordered">
                 <thead>
@@ -40,7 +53,7 @@ class Table extends Component {
                     {
                         newArray.map(row => (
                             <tr>
-                                <th scope="col">{row.from}</th>
+                                <th scope="col">{row.des}</th>
                                 {row.text.map(e => (
                                     <th scope="col">{Object.keys(e)}</th>
                                 ))}
