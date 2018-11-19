@@ -4,7 +4,7 @@ class Table extends Component {
 
     showTable() {
 
-        const sortData = this.props.objModel.model.linkDataArray.sort((a,b) => (a.from > b.from) ? 1 : ((b.from > a.from) ? -1 : 0))
+        const sortData = this.props.objModel.model.linkDataArray.sort((a,b) => (parseInt(a.from.substring(1)) > parseInt(b.from.substring(1))) ? 1 : ((parseInt(b.from.substring(1)) > parseInt(a.from.substring(1))) ? -1 : 0))
         const dataLength = [...this.props.objModel.data]
         let newArray = []
         
@@ -21,12 +21,10 @@ class Table extends Component {
         }
 
         for (let i = 0; i < newArray.length; i++) {
-            for (let j = 0; j < 1; j++) {
-                let temp = newArray[i].text[j]
-                newArray[i].text[j] = newArray[i].text[j+1]
-                newArray[i].text[j+1] = temp
-            }
+            newArray[i].text.sort((a,b) => (Object.values(a) > Object.values(b)) ? 1 : ((Object.values(b) > Object.values(a)) ? -1 : 0))
         }
+
+        console.log(newArray)
 
         return (
             <table class="table table-bordered">

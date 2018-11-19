@@ -15,12 +15,13 @@ class Form extends Component {
         const inputArray = event.target.input.value.split("").filter(num => !isNaN(num)).filter(num => num !== " ")
         const condition = event.target.condition.value
 
-        this.renderCanvas(inputArray, condition)
+        // this.renderCanvasType1(inputArray, condition)
+        this.renderCanvasType2(inputArray, condition)
 
         document.getElementById("finiteForm").reset();
     }
 
-    renderCanvas(data, condition) {
+    renderCanvasType2(data, condition) {
         const conditionText = condition
 
         let ObjModel = {
@@ -33,29 +34,61 @@ class Form extends Component {
             data: data
         }
 
+
+        //Create Node(State)
         for (let i = 0; i <= conditionText.length; i++) {
             let node = "S"+i
-            ObjModel.model.nodeDataArray.push({key: node, text: node, transit: conditionText[i.toString()]})
+            ObjModel.model.nodeDataArray.push({key: node,
+                 text: node,
+                 transit: conditionText[i],
+                 state: conditionText.substring(0, i),
+                 error: []
+                })
         }
 
+        //Insert error input
+        for (let i = 0; i < ObjModel.model.nodeDataArray.length; i++) {
+            for (let j = 0; j < data.length; j++) {
+                if(ObjModel.model.nodeDataArray[i].transit !== data[j]){
+                    ObjModel.model.nodeDataArray[i].error.push(data[j])
+                }
+            }
+        }
+
+        //Insert transit to linkDataArray
         for (let i = 0; i < ObjModel.model.nodeDataArray.length - 1; i++) {
             let node = ObjModel.model.nodeDataArray[i].key
             let nextNode = ObjModel.model.nodeDataArray[i+1].key
             ObjModel.model.linkDataArray.push({from: node, to: nextNode, text: conditionText[i]})
         }
 
-        for (let i = 0; i < ObjModel.model.nodeDataArray.length; i++) {
-            let node = ObjModel.model.nodeDataArray[i].key
-            let originNode = ObjModel.model.nodeDataArray[0].key
-            for (let j = 0; j < data.length; j++) {
-                if(i === ObjModel.model.nodeDataArray.length - 1) {
-                    ObjModel.model.linkDataArray.push({from: node, to: node, text: data[j]})                    
-                } else if(ObjModel.model.nodeDataArray[i].transit !== data[j]) {
-                    ObjModel.model.linkDataArray.push({from: node, to: originNode, text: data[j]})
+        //Insert error transit to every node and ever case
+        for (let i = 1; i < ObjModel.model.nodeDataArray.length - 1; i++) {
+            for (let j = 0; j < ObjModel.model.nodeDataArray[i].error.length; j++) {
+                const errorState = ObjModel.model.nodeDataArray[i].state + ObjModel.model.nodeDataArray[i].error[j]
+                for (let k = i; k >= 0; k--) {
+                    if(errorState.substring(errorState.length - k) === ObjModel.model.nodeDataArray[k].state) {
+                        // console.log("error => ", errorState.substring(errorState.length - k), "Node = ",  ObjModel.model.nodeDataArray[k].text, "state = ", ObjModel.model.nodeDataArray[k].state, "from", ObjModel.model.nodeDataArray[i].key, "text", ObjModel.model.nodeDataArray[i].error[j])
+                        ObjModel.model.linkDataArray.push({from: ObjModel.model.nodeDataArray[i].key, to: ObjModel.model.nodeDataArray[k].key, text: ObjModel.model.nodeDataArray[i].error[j]})
+                        break
+                    }
                 }
-                
             }
         }
+
+        //Inset error transit to first state
+        const firstState = ObjModel.model.nodeDataArray[0]
+        for (let i = 0; i < ObjModel.model.nodeDataArray[0].error.length; i++) {
+            ObjModel.model.linkDataArray.push({from: firstState.key, to: firstState.key, text: firstState.error[i]})
+        }
+
+        //Insert error transit to last state
+        const lastState = ObjModel.model.nodeDataArray[ObjModel.model.nodeDataArray.length - 1]
+        for (let i = 0; i < lastState.error.length; i++) {
+            ObjModel.model.linkDataArray.push({from: lastState.key, to: lastState.key, text: lastState.error[i]})
+        }
+
+        //sendDataObjectToDiagram and table
         this.props.onMyDiagramUpdate(ObjModel)
     }
 
