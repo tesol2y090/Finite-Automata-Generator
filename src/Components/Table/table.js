@@ -24,8 +24,6 @@ class Table extends Component {
             newArray[i].text.sort((a,b) => (Object.values(a) > Object.values(b)) ? 1 : ((Object.values(b) > Object.values(a)) ? -1 : 0))
         }
 
-        console.log(newArray)
-
         return (
             <table class="table table-bordered">
                 <thead>
@@ -56,12 +54,10 @@ class Table extends Component {
 
     render() {
         if(this.props.objModel) {
-            console.log("Table => ", this.props.objModel)
             return (
                 this.showTable()
             )
         } else {
-            console.log("Table => ", this.props.objModel)
             return (
                 ""
             )

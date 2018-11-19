@@ -42,7 +42,8 @@ class Form extends Component {
                  text: node,
                  transit: conditionText[i],
                  state: conditionText.substring(0, i),
-                 error: []
+                 error: [],
+                 description: ""
                 })
         }
 
@@ -68,7 +69,6 @@ class Form extends Component {
                 const errorState = ObjModel.model.nodeDataArray[i].state + ObjModel.model.nodeDataArray[i].error[j]
                 for (let k = i; k >= 0; k--) {
                     if(errorState.substring(errorState.length - k) === ObjModel.model.nodeDataArray[k].state) {
-                        // console.log("error => ", errorState.substring(errorState.length - k), "Node = ",  ObjModel.model.nodeDataArray[k].text, "state = ", ObjModel.model.nodeDataArray[k].state, "from", ObjModel.model.nodeDataArray[i].key, "text", ObjModel.model.nodeDataArray[i].error[j])
                         ObjModel.model.linkDataArray.push({from: ObjModel.model.nodeDataArray[i].key, to: ObjModel.model.nodeDataArray[k].key, text: ObjModel.model.nodeDataArray[i].error[j]})
                         break
                     }
