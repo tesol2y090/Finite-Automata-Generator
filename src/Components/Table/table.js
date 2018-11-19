@@ -66,7 +66,7 @@ class Table extends Component {
     }
 
     render() {
-        if(this.props.objModel) {
+        if(this.props.objModel && !this.props.showAlert.showAlert) {
             return (
                 this.showTable()
             )

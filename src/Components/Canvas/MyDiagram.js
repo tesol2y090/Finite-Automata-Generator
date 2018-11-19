@@ -85,7 +85,7 @@ class MyDiagram extends Component {
 
 
     render() {
-        if(this.props.objModel) {
+        if(this.props.objModel && !this.props.showAlert.showAlert) {
             return (
                 <GojsDiagram
                     diagramId="myDiagramDiv"

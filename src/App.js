@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Form from './Components/Form'
 import MyDiagram from './Components/Canvas/MyDiagram'
 import Table from './Components/Table/table'
+import Alert from './Components/Alert/Alert'
 
 const Container = styled.div`
   background: #D6D6D6;
@@ -24,13 +25,22 @@ const ContainerDia = styled.div`
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      showAlert: false
+    }
     this.getStateForm = this.getStateForm.bind(this);
+    this.getStateAlert = this.getStateAlert.bind(this);
   }
 
   getStateForm(diargram) {
     this.setState({
-      diargram: diargram
+      diargram: diargram,
+    })
+  }
+
+  getStateAlert(alert) {
+    this.setState({
+      showAlert: alert
     })
   }
 
@@ -39,11 +49,12 @@ class App extends Component {
     return (
       <div>
         <Container>
-          <Form onMyDiagramUpdate={this.getStateForm}/>
+          <Form onMyDiagramUpdate={this.getStateForm} onAlertUpdate={this.getStateAlert}/>
         </Container>
+          <Alert showAlert={this.state.showAlert}/>
         <ContainerDia>
-          <MyDiagram objModel={this.state.diargram}/>
-          <Table objModel={this.state.diargram}/>
+          <MyDiagram objModel={this.state.diargram} showAlert={this.state.showAlert}/>
+          <Table objModel={this.state.diargram} showAlert={this.state.showAlert}/>
         </ContainerDia>
       </div>
     );

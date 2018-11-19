@@ -14,6 +14,21 @@ class Form extends Component {
         event.preventDefault();
         const inputArray = event.target.input.value.split("").filter(num => !isNaN(num)).filter(num => num !== " ")
         const condition = event.target.condition.value
+        
+
+        if(inputArray.length === 0 || condition.length === 0) {
+            let alert = {
+                showAlert: true
+            }
+            this.props.onAlertUpdate(alert)
+            document.getElementById("finiteForm").reset();
+            return
+        } else {
+            let alert = {
+                showAlert: false
+            }
+            this.props.onAlertUpdate(alert)
+        }
 
         // this.renderCanvasType1(inputArray, condition)
         this.renderCanvasType2(inputArray, condition)
