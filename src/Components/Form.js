@@ -16,9 +16,23 @@ class Form extends Component {
         const condition = event.target.condition.value
         let isValid = true
 
+
         //Check condition does't contain in data
         for (let i = 0; i < condition.length; i++) {
             if(inputArray.indexOf(condition[i]) === -1) {
+                isValid = false
+            }
+        }
+
+        //Check multiple input
+        for (let i = 0; i < inputArray.length; i++) {
+            let count = 0
+            for (let j = 0; j < inputArray.length; j++) {
+                if(inputArray[i] === inputArray[j]) {
+                    count++;
+                }
+            }
+            if(count > 1) {
                 isValid = false
             }
         }
