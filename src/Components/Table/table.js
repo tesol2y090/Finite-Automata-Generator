@@ -35,8 +35,6 @@ class Table extends Component {
             }
         }
 
-        console.log(newArray)
-
         return (
             <table class="table table-bordered">
                 <thead>

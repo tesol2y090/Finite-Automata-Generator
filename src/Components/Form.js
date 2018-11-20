@@ -14,9 +14,16 @@ class Form extends Component {
         event.preventDefault();
         const inputArray = event.target.input.value.split("").filter(num => !isNaN(num)).filter(num => num !== " ")
         const condition = event.target.condition.value
-        
+        let isValid = true
 
-        if(inputArray.length === 0 || condition.length === 0) {
+        //Check condition does't contain in data
+        for (let i = 0; i < condition.length; i++) {
+            if(inputArray.indexOf(condition[i]) === -1) {
+                isValid = false
+            }
+        }
+
+        if(inputArray.length === 0 || condition.length === 0 || !isValid) {
             let alert = {
                 showAlert: true
             }
