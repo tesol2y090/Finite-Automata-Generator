@@ -21,6 +21,10 @@ const ContainerDia = styled.div`
   width: 80%;
 `
 
+const Heading = styled.h1`
+  text-align center
+`
+
 
 class App extends Component {
   constructor(props) {
@@ -48,6 +52,8 @@ class App extends Component {
 
     return (
       <div>
+
+        <Heading>Finite State Machine Generators</Heading>
         <Container>
           <Form onMyDiagramUpdate={this.getStateForm} onAlertUpdate={this.getStateAlert}/>
         </Container>

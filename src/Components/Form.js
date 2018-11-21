@@ -16,7 +16,6 @@ class Form extends Component {
         const condition = event.target.condition.value
         let isValid = true
 
-
         //Check condition does't contain in data
         for (let i = 0; i < condition.length; i++) {
             if(inputArray.indexOf(condition[i]) === -1) {
@@ -135,11 +134,11 @@ class Form extends Component {
                 <form onSubmit={this.showData.bind(this)} id="finiteForm">
                     <div class="form-group">
                         <label id="Input">Set of input </label>
-                        <input type="text" class="form-control" id="input" placeholder="Please input input"></input>
+                        <input type="text" class="form-control" id="input" placeholder="Please input input {x1, x2, x3, ..., xn}"></input>
                     </div>
                     <div class="form-group">
                         <label id="Input">Condition</label>
-                        <input type="text" class="form-control" id="condition" placeholder="Please input Condition"></input>
+                        <input type="text" class="form-control" id="condition" placeholder="Please input Condition y1y2y3y4...yn "></input>
                     </div>
                     <button type="submit" class="btn btn-light ">Submit</button>
                 </form>
