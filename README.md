@@ -1,6 +1,7 @@
 # Finite-Automata-Generator
 
 This project is part of Discrete Mathermetics, We build application that generate finite diagram from input and condition string.
+https://finitegen-f3db9.firebaseapp.com
 
 ### Prerequisites
 
