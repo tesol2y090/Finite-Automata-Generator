@@ -1,6 +1,6 @@
 # Finite-Automata-Generator
 
-This project is part of Discrete Mathermetics, We build application that generate finite diagram from input and condition string.
+This project is part of Discrete Mathemetics. We built an application that generates a finite diagram from input and condition strings.
 https://finitegen-f3db9.firebaseapp.com
 
 ### Prerequisites
@@ -13,7 +13,7 @@ Node.js
 
 
 ```
-Npm install
+npm install
 ```
 
 ```
@@ -28,7 +28,7 @@ yarn start
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Add additional notes about how to deploy this on a live system.
 
 ## Built With
 
@@ -38,5 +38,5 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please fork and pull request
+Please fork and pull request.
 
