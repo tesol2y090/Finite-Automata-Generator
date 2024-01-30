@@ -13,7 +13,7 @@ Node.js
 
 
 ```
-Npm install
+npm install
 ```
 
 ```
